@@ -8,9 +8,9 @@
     <div class="container">
         <h1>Blog</h1>
         <ul>
-            <li><a href="">title</a></li>
-            <li><a href="">title</a></li>
-            <li><a href="">title</a></li>
+            @foreach ($posts as $post)
+                <li><a href="">{{$post->title}}</a></li>
+            @endforeach
         </ul>
     </div>
 </body>
