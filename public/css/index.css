@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+.container {
+    text-align: center;
+}
+.container_heading {
+    border-bottom: 5px solid slateblue; 
+    width: 40%;
+    margin: 20px auto;
+    border-radius: 5px;
+}
