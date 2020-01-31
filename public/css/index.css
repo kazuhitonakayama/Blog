@@ -15,6 +15,11 @@ a {
     color: steelblue;
 }
 
+.error {
+    color: red;
+    display: block;
+}
+
 .container {
     text-align: center;
 }
