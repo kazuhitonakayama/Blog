@@ -10,7 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/posts/create','PostsController@create');
 Route::get('/','PostsController@index');
-Route::get('/posts/{id}','PostsController@show');
+/* ->whereの記述により、/posts/{id}には数字のみ引用されることとなり、のちのルーティングとのバッティングが起こらない */
+Route::get('/posts/{id}','PostsController@show')->where('post','[0-9]+');
+Route::post('/posts','PostsController@store');
+
 

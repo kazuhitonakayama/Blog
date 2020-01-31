@@ -21,5 +21,18 @@ class PostsController extends Controller
         //$post=Post::find($id);
         $posts=Post::findOrFail($id);
         return view('posts.show')->with('post',$posts);
-     }
+    }
+
+    public function create () {
+        return view('posts.create');
+    }
+
+    /* TODO なんで$request???? */
+    public function store (Request $request) {
+      $post = new Post();
+      $post->title = $request->title;
+      $post->body = $request->body;
+      $post->save();
+      return redirect('/');
+    }
 }
