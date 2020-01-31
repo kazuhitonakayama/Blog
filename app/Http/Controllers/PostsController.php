@@ -39,4 +39,27 @@ class PostsController extends Controller
       $post->save();
       return redirect('/');
     }
+
+    public function edit ($id) {
+      $posts=Post::findOrFail($id);
+      return view('posts.edit')->with('post',$posts);
+    }
+
+    public function update (Request $request, Post $post) {
+      $this->validate($request,[
+        'title' => 'required|min:3',
+        'body'  => 'required|min:5'
+      ]);
+      /** 
+       * $requestにはPOSTで受け取った情報（ユーザーが編集した記事）が入っている。
+       * findメソッドで、指定されたid（$requestのidプロパティ）に該当するレコードを取得し、$postへ代入する
+       * この$articleに代入されるレコードは編集前のものである。これを、編集後の内容が代入されている$requestの内容に更新しなければならない。
+       * $requestから各プロパティを呼び出し、$articleの各プロパティとして代入する。（上書き保存のイメージだ。）
+       */
+      $post = Post::find($request->id);
+      $post->title = $request->title;
+      $post->body = $request->body;
+      $post->save();
+      return redirect('/');
+    }
 }

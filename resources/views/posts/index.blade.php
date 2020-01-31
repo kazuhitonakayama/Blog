@@ -9,7 +9,10 @@
         </h1>
         <ul>
             @foreach ($posts as $post)
-                <li><a href="/posts/{{$post->id}}">{{$post->title}}</a></li>
+                <li>
+                    <a href="/posts/{{$post->id}}">{{$post->title}}</a>
+                    <a href="/posts/{{$post->id}}/edit" class="edit">[編集]</a>
+                </li>
             @endforeach
         </ul>
 @endsection
