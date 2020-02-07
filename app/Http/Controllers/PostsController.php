@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Http\Requests\PostRequest;
 
 class PostsController extends Controller
 {
     //
+    /** 投稿の一覧画面へ遷移 */
     public function index () {
        //$posts = Post::all();
        //$posts = Post::orderBy('created_at','desc')->get();
@@ -17,22 +19,27 @@ class PostsController extends Controller
         return view('posts.index')->with('posts',$posts);
     }
 
+    /** 投稿の詳細画面へ遷移 */
     public function show ($id) {
         //$post=Post::find($id);
         $posts=Post::findOrFail($id);
         return view('posts.show')->with('post',$posts);
     }
 
+    /**新規投稿作成ページに遷移するのみ */
     public function create () {
         return view('posts.create');
     }
 
     /* TODO なんで$request???? */
-    public function store (Request $request) {
+    /**　新規投稿 */
+    public function store (PostRequest $request) {
+      /* このヴァリデーション部分はPostRequest.phpで対応している
       $this->validate($request,[
         'title' => 'required|min:3',
         'body'  => 'required|min:5'
       ]);
+      */
       $post = new Post();
       $post->title = $request->title;
       $post->body = $request->body;
@@ -40,16 +47,20 @@ class PostsController extends Controller
       return redirect('/');
     }
 
+    /** 編集画面へ遷移するのみ */
     public function edit ($id) {
       $posts=Post::findOrFail($id);
       return view('posts.edit')->with('post',$posts);
     }
 
-    public function update (Request $request, Post $post) {
+    /** 編集画面にて、従前の投稿内容をもとに編集する */
+    public function update (PostRequest $request, Post $post) {
+      /* このヴァリデーション部分はPostRequest.phpで対応している
       $this->validate($request,[
         'title' => 'required|min:3',
         'body'  => 'required|min:5'
       ]);
+      */
       /** 
        * $requestにはPOSTで受け取った情報（ユーザーが編集した記事）が入っている。
        * findメソッドで、指定されたid（$requestのidプロパティ）に該当するレコードを取得し、$postへ代入する
