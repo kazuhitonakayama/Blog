@@ -18,5 +18,7 @@ Route::post('/posts','PostsController@store');
 Route::get('/posts/{id}/edit','PostsController@edit');
 /* 編集の際にはpatchメソッドを使用する */
 Route::patch('/posts/{id}','PostsController@update');
+/** 投稿の削除機能 */
+Route::delete('/posts/{id}','PostsController@destroy');
 
 

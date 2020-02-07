@@ -73,4 +73,11 @@ class PostsController extends Controller
       $post->save();
       return redirect('/');
     }
+
+    /** 投稿の削除機能 */
+    /** https://qiita.com/yoshinyan/items/22f4351aa857a4a10e5c */
+    public function destroy(Request $request) {
+      Post::find($request->id)->delete();
+      return redirect('/');
+    }
 }
